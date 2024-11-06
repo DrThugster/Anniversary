@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DatingApp from './components/DatingApp';
+import TanishqQuestion from './components/TanishqQuestion';
+import LoveScale from './components/LoveScale';
+import CelebrationPage from './components/CelebrationPage';
+import MemoriesPage from './components/MemoriesPage';
+import CurrentPage from './components/CurrentPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<DatingApp />} />
+        <Route path="/tanishq-question" element={<TanishqQuestion />} />
+        <Route path="/love-scale" element={<LoveScale />} />
+        <Route path="/celebration" element={<CelebrationPage />} />
+        <Route path="/memories" element={<MemoriesPage />} />
+        <Route path="/current" element={<CurrentPage />} />
+
+      </Routes>
+    </Router>
   );
 }
 

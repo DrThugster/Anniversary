@@ -1,0 +1,59 @@
+/* components/MemoriesPage.css */
+.memories-container {
+    @apply min-h-screen bg-gradient-to-br from-purple-900 via-red-900 to-pink-900
+           flex flex-col items-center p-8;
+  }
+  
+  .memories-title {
+    @apply text-4xl font-bold text-rose-300 mb-8 animate-glow;
+  }
+  
+  .memories-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full;
+  }
+  
+  .memory-card {
+    @apply bg-black/30 backdrop-blur rounded-lg overflow-hidden
+           border border-rose-500/20 transform transition-all
+           hover:scale-105 animate-fade-in;
+  }
+  
+  .memory-media {
+    @apply w-full h-64 object-cover;
+  }
+  
+  .memory-description {
+    @apply p-4;
+  }
+  
+  .memory-description h3 {
+    @apply text-xl font-bold text-rose-300 mb-2;
+  }
+  
+  .memory-description p {
+    @apply text-rose-100;
+  }
+  
+  .next-page-button {
+    @apply mt-8 px-8 py-3 bg-gradient-to-r from-rose-500 to-purple-500
+           hover:from-rose-600 hover:to-purple-600 text-white rounded-lg
+           transform transition-all hover:scale-105 font-medium;
+  }
+  
+  @media (max-width: 768px) {
+    .memories-title {
+      @apply text-3xl mb-6;
+    }
+  
+    .memories-grid {
+      @apply grid-cols-1;
+    }
+  
+    .memory-card {
+      @apply mx-4;
+    }
+  
+    .next-page-button {
+      @apply px-6 py-2 text-sm;
+    }
+  }

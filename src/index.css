@@ -1,13 +1,385 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+body, html {
+  @apply m-0 p-0 overflow-hidden;
+  height: 100vh;
+  width: 100vw;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-rotate {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 20px rgba(244, 114, 182, 0.5); }
+  50% { text-shadow: 0 0 30px rgba(244, 114, 182, 0.8); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
+  }
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+  animation: float 3s ease-in-out infinite 1s;
+}
+
+.animate-float-delay-2 {
+  animation: float 3s ease-in-out infinite 2s;
+}
+
+.animate-float-rotate {
+  animation: float-rotate 3s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Component styles */
+.question-container {
+  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
+         flex items-center justify-center overflow-hidden;
+}
+
+.question-content {
+  @apply flex flex-col items-center justify-center p-8 relative;
+}
+
+.avatar-image {
+  @apply w-32 h-32 rounded-full border-4 border-rose-500/50 mb-8 animate-bounce-slow;
+}
+
+.question-title {
+  @apply text-5xl font-bold text-rose-300 mb-12 animate-glow;
+}
+
+.buttons-container {
+  @apply relative w-full max-w-xs flex justify-center items-center;
+}
+
+.yes-button, .no-button {
+  @apply px-8 py-3 rounded-lg transform transition-all duration-300;
+}
+
+.yes-button {
+  @apply bg-gradient-to-r from-rose-500 to-purple-500 
+         text-white hover:scale-105 z-10;
+}
+
+.no-button {
+  @apply bg-gray-900 text-rose-300 ml-4 transition-all duration-300;
+}
+
+.no-button.moving {
+  transition: all 0.3s ease-out;
+}
+
+.message-popup {
+  @apply fixed top-4 left-1/2 transform -translate-x-1/2 
+         bg-black/60 text-rose-300 px-6 py-3 rounded-lg 
+         backdrop-blur z-50 animate-bounce-in text-center;
+}
+
+/* Success page styles */
+.success-container {
+  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
+         flex items-center justify-center p-4;
+}
+
+.success-content {
+  @apply max-w-md w-full bg-black/30 backdrop-blur rounded-lg 
+         shadow-xl p-8 border border-rose-500/20 text-center;
+}
+
+.emoji-couple {
+  @apply text-4xl mb-6 flex justify-center items-center gap-2;
+}
+
+.emoji-row {
+  @apply flex justify-center space-x-4 mt-8;
+}
+
+.emoji {
+  @apply text-4xl;
+}
+
+.success-title {
+  @apply text-4xl font-bold text-rose-300 mb-6 animate-glow;
+}
+
+.quote-box {
+  @apply mt-8 p-6 bg-black/20 rounded-xl border border-rose-500/20;
+}
+
+.next-button {
+  @apply mt-8 px-8 py-3 bg-gradient-to-r from-rose-500 to-purple-500 
+         text-white rounded-lg transform transition-all hover:scale-105;
+}
+
+/* Prevent text selection */
+* {
+  user-select: none;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+body, html {
+  @apply m-0 p-0 overflow-hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-rotate {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 20px rgba(244, 114, 182, 0.5); }
+  50% { text-shadow: 0 0 30px rgba(244, 114, 182, 0.8); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
+  }
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+  animation: float 3s ease-in-out infinite 1s;
+}
+
+.animate-float-delay-2 {
+  animation: float 3s ease-in-out infinite 2s;
+}
+
+.animate-float-rotate {
+  animation: float-rotate 3s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Component styles */
+.question-container {
+  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
+         flex items-center justify-center overflow-hidden;
+}
+
+.question-content {
+  @apply flex flex-col items-center justify-center p-8 relative;
+}
+
+.avatar-image {
+  @apply w-32 h-32 rounded-full border-4 border-rose-500/50 mb-8 animate-bounce-slow;
+}
+
+.question-title {
+  @apply text-5xl font-bold text-rose-300 mb-12 animate-glow;
+}
+
+.buttons-container {
+  @apply relative w-full max-w-xs flex justify-center items-center;
+}
+
+.yes-button, .no-button {
+  @apply px-8 py-3 rounded-lg transform transition-all duration-300;
+}
+
+.yes-button {
+  @apply bg-gradient-to-r from-rose-500 to-purple-500 
+         text-white hover:scale-105 z-10;
+}
+
+.no-button {
+  @apply bg-gray-900 text-rose-300 ml-4 transition-all duration-300;
+}
+
+.no-button.moving {
+  transition: all 0.3s ease-out;
+}
+
+.message-popup {
+  @apply fixed top-4 left-1/2 transform -translate-x-1/2 
+         bg-black/60 text-rose-300 px-6 py-3 rounded-lg 
+         backdrop-blur z-50 animate-bounce-in text-center;
+}
+
+/* Success page styles */
+.success-container {
+  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
+         flex items-center justify-center p-4;
+}
+
+.success-content {
+  @apply max-w-md w-full bg-black/30 backdrop-blur rounded-lg 
+         shadow-xl p-8 border border-rose-500/20 text-center;
+}
+
+.emoji-couple {
+  @apply text-4xl mb-6 flex justify-center items-center gap-2;
+}
+
+.emoji-row {
+  @apply flex justify-center space-x-4 mt-8;
+}
+
+.emoji {
+  @apply text-4xl;
+}
+
+.success-title {
+  @apply text-4xl font-bold text-rose-300 mb-6 animate-glow;
+}
+
+.quote-box {
+  @apply mt-8 p-6 bg-black/20 rounded-xl border border-rose-500/20;
+}
+
+.next-button {
+  @apply mt-8 px-8 py-3 bg-gradient-to-r from-rose-500 to-purple-500 
+         text-white rounded-lg transform transition-all hover:scale-105;
+}
+
+/* Prevent text selection */
+* {
+  user-select: none;
+}
+
+/* Memory cards styling */
+.memory-card {
+  @apply relative overflow-hidden rounded-2xl shadow-xl bg-black/20 backdrop-blur-sm;
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.memory-card-large {
+  @apply relative aspect-[16/9] rounded-2xl shadow-xl overflow-hidden
+         transform transition-all duration-500 hover:scale-[1.02];
+}
+
+.memory-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent
+         flex flex-col justify-end p-6 opacity-0 hover:opacity-100
+         transition-opacity duration-300;
+}
+
+/* Staggered animation for cards */
+.memory-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.memory-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.memory-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects */
+.memory-card:hover .memory-overlay {
+  @apply opacity-100;
+}
+
+.memory-card img {
+  @apply transition-transform duration-500;
+}
+
+.memory-card:hover img {
+  @apply scale-110;
+}
+
+/* Modal animation */
+.modal-enter {
+  @apply opacity-0;
+}
+
+.modal-enter-active {
+  @apply opacity-100 transition-opacity duration-300;
+}
+
+.modal-exit {
+  @apply opacity-100;
+}
+
+.modal-exit-active {
+  @apply opacity-0 transition-opacity duration-300;
 }
