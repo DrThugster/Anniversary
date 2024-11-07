@@ -21,8 +21,8 @@ const TanishqQuestion = () => {
     const minX = container.width * 0.1;
     const minY = container.height * 0.2;
 
-    const newX = Math.random() * (maxX - minX) + minX;
-    const newY = Math.random() * (maxY - minY) + minY;
+    const newX = Math.max(Math.random() * (maxX - minX) + minX, 0); 
+    const newY = Math.max(Math.random() * (maxY - minY) + minY, 0);
 
     setIsInitialPosition(false);
     setNoButtonPosition({ x: newX, y: newY });
@@ -51,7 +51,7 @@ const TanishqQuestion = () => {
           {/* Image */}
           <div className="w-32 h-32 mx-auto mb-12">
             <img 
-              src="/tanishq-image.png"
+              src="/profile/tanishq.jpg"
               alt="Tanishq"
               className="w-full h-full rounded-full border-2 border-rose-500/50"
             />
@@ -74,7 +74,7 @@ const TanishqQuestion = () => {
             </button>
 
             <button
-              onClick={moveNoButton}
+              onClick={moveNoButton} onmouseover={moveNoButton}
               style={
                 isInitialPosition 
                   ? {} 

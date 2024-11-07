@@ -1,7 +1,7 @@
 // components/DatingApp.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, X, Volume2, VolumeX } from 'lucide-react';
+import { Heart, X} from 'lucide-react';
 import { 
   profiles, 
   funnyRejectMessages, 
@@ -14,25 +14,8 @@ const DatingApp = () => {
   const [step, setStep] = useState('intro');
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const [message, setMessage] = useState('');
-  const [isMuted, setIsMuted] = useState(true);
   const [isProfileVisible, setIsProfileVisible] = useState(true);
-  const [audio] = useState(new Audio('/audio/background-music.mp3'));
-
-  useEffect(() => {
-    const handleFirstInteraction = () => {
-      audio.play();
-      audio.loop = true;
-      document.removeEventListener('click', handleFirstInteraction);
-    };
-
-    document.addEventListener('click', handleFirstInteraction);
-
-    return () => {
-      audio.pause();
-      document.removeEventListener('click', handleFirstInteraction);
-    };
-  }, [audio]);
-
+  
 
   
   const handleStart = () => {

@@ -3,26 +3,165 @@
 @tailwind utilities;
 
 /* Base styles */
-body, html {
-  @apply m-0 p-0 overflow-hidden;
-  height: 100vh;
-  width: 100vw;
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Animation keyframes */
+html, body, #root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Common containers */
+.celebration-container {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom right, #581c87, #881337, #831843);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: 16px; /* Space between GIF and button */
+}
+
+.celebration-content {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  padding: 2vh 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.celebration-gif-container {
+  height: 200px;
+  max-width: 2000px;
+  margin-bottom: 20px; /* Adds spacing between GIF and button */
+}
+
+/* GIF styling */
+.celebration-gif {
+  max-width: 4000px; /* Adjusts to container width */
+  height: 200px; /* Maintains aspect ratio */
+  margin-bottom: 20px; /* Space below the GIF */
+}
+
+/* Start button specific */
+.start-button {
+  width: auto;
+  padding: 12px 32px;
+  font-size: 1.25rem;
+  background: linear-gradient(to right, #f43f5e, #a855f7);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  transform: scale(1.05); /* Slight enlarge effect */
+  background: linear-gradient(to right, #e11d48, #9333ea);
+}
+
+
+/* Title section - Reduced sizes */
+.title-section {
+  text-align: center;
+  margin-top: 2vh;
+}
+
+.main-title {
+  font-size: clamp(1.75rem, 5vw, 3.5rem); /* Reduced from previous sizes */
+  font-weight: bold;
+  color: #fbb6ce;
+  margin-bottom: 1vh;
+  animation: glow 2s infinite;
+}
+
+.sub-title {
+  font-size: clamp(1.25rem, 3vw, 2rem); /* Reduced from previous sizes */
+  color: #fed7e2;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bouquet section - Increased size by 10% */
+.bouquet-section {
+  width: min(440px, 88vw); /* Increased from 400px */
+  height: min(440px, 55vh); /* Increased from 400px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh 0;
+}
+
+.bouquet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Continue button - Adjusted size */
+.button-section {
+  width: min(300px, 80vw); /* Reduced width for better proportion */
+  margin-bottom: 4vh;
+}
+
+.continue-button {
+  width: 100%;
+  padding: 10px 24px;
+  font-size: 1.1rem;
+  background: linear-gradient(to right, #f43f5e, #a855f7);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.continue-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #e11d48, #9333ea);
+}
+
+/* Decorations */
+.decorations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.decoration {
+  position: absolute;
+  font-size: clamp(12px, 2vw, 16px);
+  opacity: 0.6;
+}
+
+.star {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.heart {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-@keyframes float-rotate {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(5deg); }
-}
-
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 @keyframes glow {
@@ -30,356 +169,150 @@ body, html {
   50% { text-shadow: 0 0 30px rgba(244, 114, 182, 0.8); }
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 1;
-    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
+/* Small screen adjustments */
+@media (max-height: 600px) {
+  .main-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
   }
-  50% {
-    opacity: 0.8;
-    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
+  
+  .sub-title {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  
+  .bouquet-section {
+    height: min(440px, 60vh);
   }
 }
 
-/* Animation classes */
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-float-delay-1 {
-  animation: float 3s ease-in-out infinite 1s;
-}
-
-.animate-float-delay-2 {
-  animation: float 3s ease-in-out infinite 2s;
-}
-
-.animate-float-rotate {
-  animation: float-rotate 3s ease-in-out infinite;
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s infinite;
-}
-
-.animate-glow {
-  animation: glow 2s infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s infinite;
-}
-
-/* Component styles */
-.question-container {
+/* Base layout */
+.memories-page {
   @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
-         flex items-center justify-center overflow-hidden;
+         overflow-hidden p-6;
+         background: linear-gradient(to bottom right, #581c87, #881337, #831843);
 }
 
-.question-content {
-  @apply flex flex-col items-center justify-center p-8 relative;
+.memories-title {
+  @apply text-2xl font-bold text-rose-300 text-center mb-6;
 }
 
-.avatar-image {
-  @apply w-32 h-32 rounded-full border-4 border-rose-500/50 mb-8 animate-bounce-slow;
+.memories-layout {
+  @apply flex gap-6 h-[calc(100vh-100px)];
 }
 
-.question-title {
-  @apply text-5xl font-bold text-rose-300 mb-12 animate-glow;
+/* Mobile-like Featured Photo Section */
+.featured-photo {
+  @apply w-[280px] h-full relative bg-black/30 backdrop-blur-sm 
+         rounded-2xl overflow-hidden border border-rose-500/20;
 }
 
-.buttons-container {
-  @apply relative w-full max-w-xs flex justify-center items-center;
+.featured-slide {
+  @apply absolute inset-0 opacity-0 transition-all duration-1000;
 }
 
-.yes-button, .no-button {
-  @apply px-8 py-3 rounded-lg transform transition-all duration-300;
+.featured-slide.active {
+  @apply opacity-100;
 }
 
-.yes-button {
-  @apply bg-gradient-to-r from-rose-500 to-purple-500 
-         text-white hover:scale-105 z-10;
+.featured-image {
+  @apply w-full h-full object-cover;
 }
 
-.no-button {
-  @apply bg-gray-900 text-rose-300 ml-4 transition-all duration-300;
+.featured-info {
+  @apply absolute bottom-0 left-0 right-0 p-4
+         bg-gradient-to-t from-black/80 to-transparent;
 }
 
-.no-button.moving {
-  transition: all 0.3s ease-out;
+.featured-info h3 {
+  @apply text-sm font-bold text-white mb-1;
 }
 
-.message-popup {
-  @apply fixed top-4 left-1/2 transform -translate-x-1/2 
-         bg-black/60 text-rose-300 px-6 py-3 rounded-lg 
-         backdrop-blur z-50 animate-bounce-in text-center;
+.featured-info p {
+  @apply text-xs text-gray-200;
 }
 
-/* Success page styles */
-.success-container {
-  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
-         flex items-center justify-center p-4;
+/* Fixed Grid Section */
+/* Right Panel (Photos Grid) */
+/* Right Panel (Photos Grid Container) */
+.photos-grid {
+  @apply flex-1 h-full bg-black/10 rounded-2xl p-4 overflow-hidden relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
+  grid-auto-flow: dense;
+  gap: 15px;
+  overflow: hidden; /* Prevents overflow outside the container */
+  box-shadow: horizontal-offset vertical-offset blur-radius spread-radius color; 
 }
 
-.success-content {
-  @apply max-w-md w-full bg-black/30 backdrop-blur rounded-lg 
-         shadow-xl p-8 border border-rose-500/20 text-center;
+/* Preserve text color on hover */
+.photo-overlay h4,
+.photo-overlay p {
+  @apply text-white; /* Ensure the text remains white */
 }
 
-.emoji-couple {
-  @apply text-4xl mb-6 flex justify-center items-center gap-2;
-}
-
-.emoji-row {
-  @apply flex justify-center space-x-4 mt-8;
-}
-
-.emoji {
-  @apply text-4xl;
-}
-
-.success-title {
-  @apply text-4xl font-bold text-rose-300 mb-6 animate-glow;
-}
-
-.quote-box {
-  @apply mt-8 p-6 bg-black/20 rounded-xl border border-rose-500/20;
-}
-
-.next-button {
-  @apply mt-8 px-8 py-3 bg-gradient-to-r from-rose-500 to-purple-500 
-         text-white rounded-lg transform transition-all hover:scale-105;
-}
-
-/* Prevent text selection */
-* {
-  user-select: none;
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Base styles */
-body, html {
-  @apply m-0 p-0 overflow-hidden;
-  height: 100vh;
-  width: 100vw;
-}
-
-/* Animation keyframes */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes float-rotate {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(5deg); }
-}
-
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-@keyframes glow {
-  0%, 100% { text-shadow: 0 0 20px rgba(244, 114, 182, 0.5); }
-  50% { text-shadow: 0 0 30px rgba(244, 114, 182, 0.8); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 1;
-    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
-  }
-  50% {
-    opacity: 0.8;
-    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
-  }
-}
-
-/* Animation classes */
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-float-delay-1 {
-  animation: float 3s ease-in-out infinite 1s;
-}
-
-.animate-float-delay-2 {
-  animation: float 3s ease-in-out infinite 2s;
-}
-
-.animate-float-rotate {
-  animation: float-rotate 3s ease-in-out infinite;
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s infinite;
-}
-
-.animate-glow {
-  animation: glow 2s infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s infinite;
-}
-
-/* Component styles */
-.question-container {
-  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
-         flex items-center justify-center overflow-hidden;
-}
-
-.question-content {
-  @apply flex flex-col items-center justify-center p-8 relative;
-}
-
-.avatar-image {
-  @apply w-32 h-32 rounded-full border-4 border-rose-500/50 mb-8 animate-bounce-slow;
-}
-
-.question-title {
-  @apply text-5xl font-bold text-rose-300 mb-12 animate-glow;
-}
-
-.buttons-container {
-  @apply relative w-full max-w-xs flex justify-center items-center;
-}
-
-.yes-button, .no-button {
-  @apply px-8 py-3 rounded-lg transform transition-all duration-300;
-}
-
-.yes-button {
-  @apply bg-gradient-to-r from-rose-500 to-purple-500 
-         text-white hover:scale-105 z-10;
-}
-
-.no-button {
-  @apply bg-gray-900 text-rose-300 ml-4 transition-all duration-300;
-}
-
-.no-button.moving {
-  transition: all 0.3s ease-out;
-}
-
-.message-popup {
-  @apply fixed top-4 left-1/2 transform -translate-x-1/2 
-         bg-black/60 text-rose-300 px-6 py-3 rounded-lg 
-         backdrop-blur z-50 animate-bounce-in text-center;
-}
-
-/* Success page styles */
-.success-container {
-  @apply fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
-         flex items-center justify-center p-4;
-}
-
-.success-content {
-  @apply max-w-md w-full bg-black/30 backdrop-blur rounded-lg 
-         shadow-xl p-8 border border-rose-500/20 text-center;
-}
-
-.emoji-couple {
-  @apply text-4xl mb-6 flex justify-center items-center gap-2;
-}
-
-.emoji-row {
-  @apply flex justify-center space-x-4 mt-8;
-}
-
-.emoji {
-  @apply text-4xl;
-}
-
-.success-title {
-  @apply text-4xl font-bold text-rose-300 mb-6 animate-glow;
-}
-
-.quote-box {
-  @apply mt-8 p-6 bg-black/20 rounded-xl border border-rose-500/20;
-}
-
-.next-button {
-  @apply mt-8 px-8 py-3 bg-gradient-to-r from-rose-500 to-purple-500 
-         text-white rounded-lg transform transition-all hover:scale-105;
-}
-
-/* Prevent text selection */
-* {
-  user-select: none;
-}
-
-/* Memory cards styling */
-.memory-card {
-  @apply relative overflow-hidden rounded-2xl shadow-xl bg-black/20 backdrop-blur-sm;
-  animation: fadeIn 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-.memory-card-large {
-  @apply relative aspect-[16/9] rounded-2xl shadow-xl overflow-hidden
-         transform transition-all duration-500 hover:scale-[1.02];
-}
-
-.memory-overlay {
-  @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent
-         flex flex-col justify-end p-6 opacity-0 hover:opacity-100
-         transition-opacity duration-300;
-}
-
-/* Staggered animation for cards */
-.memory-card:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.memory-card:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.memory-card:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
+/* Continuous internal scrolling animation */
+@keyframes verticalScroll {
+  0% {
     transform: translateY(0);
   }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
-/* Hover effects */
-.memory-card:hover .memory-overlay {
+
+/* Scrolling container with animation */
+.photos-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: verticalScroll 30s linear infinite;
+}
+
+/* Grid photo styling */
+.grid-photo {
+  @apply relative rounded-xl overflow-hidden transition-all duration-300 hover:z-10 bg-black/20;
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Randomly assign spans for a varied layout */
+.grid-photo:nth-child(odd) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.grid-photo:nth-child(3n) {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+.grid-photo:nth-child(4n) {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+/* Wrapper for the grid image */
+.photo-wrapper {
+  @apply w-full h-full relative;
+}
+
+/* Image inside the photo grid */
+.grid-image {
+  @apply w-full h-full object-cover transition-transform duration-300;
+}
+
+/* Overlay effect */
+.photo-overlay {
+  @apply absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 p-3 flex flex-col justify-end;
+}
+
+.grid-photo:hover .photo-overlay {
   @apply opacity-100;
 }
 
-.memory-card img {
-  @apply transition-transform duration-500;
-}
-
-.memory-card:hover img {
+/* Hover effect for grid images */
+.grid-photo:hover .grid-image {
   @apply scale-110;
-}
-
-/* Modal animation */
-.modal-enter {
-  @apply opacity-0;
-}
-
-.modal-enter-active {
-  @apply opacity-100 transition-opacity duration-300;
-}
-
-.modal-exit {
-  @apply opacity-100;
-}
-
-.modal-exit-active {
-  @apply opacity-0 transition-opacity duration-300;
 }

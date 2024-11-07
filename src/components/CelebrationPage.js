@@ -1,31 +1,13 @@
 // components/CelebrationPage.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
 const CelebrationPage = () => {
   const navigate = useNavigate();
   const [isStarted, setIsStarted] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-  const [audio] = useState(new Audio('/celebration-music.mp3'));
-
-  useEffect(() => {
-    const handleFirstInteraction = () => {
-      audio.play();
-      audio.loop = true;
-      document.removeEventListener('click', handleFirstInteraction);
-    };
-
-    document.addEventListener('click', handleFirstInteraction);
-
-    return () => {
-      audio.pause();
-      document.removeEventListener('click', handleFirstInteraction);
-    };
-  }, [audio]);
 
   const launchConfetti = () => {
-    // Left side confetti
     confetti({
       particleCount: 3,
       angle: 60,
@@ -34,7 +16,6 @@ const CelebrationPage = () => {
       colors: ['#FFB6C1', '#FF69B4', '#FF1493', '#FFC0CB']
     });
 
-    // Right side confetti
     confetti({
       particleCount: 3,
       angle: 120,
@@ -46,15 +27,6 @@ const CelebrationPage = () => {
 
   const startCelebration = () => {
     setIsStarted(true);
-    audio.play().then(() => {
-      audio.volume = 0.6;
-      audio.loop = true;
-    }).catch(error => {
-      console.log("Audio playback failed:", error);
-    });
-
-    setTimeout(() => setShowContent(true), 500);
-
     const duration = 10 * 1000;
     const animationEnd = Date.now() + duration;
     
@@ -66,66 +38,87 @@ const CelebrationPage = () => {
     }());
   };
 
-  useEffect(() => {
-    return () => {
-      audio.pause();
-      audio.currentTime = 0;
-    };
-  }, [audio]);
-
-  if (!isStarted) {
-    return (
-      <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
-                      flex items-center justify-center">
-        <button
-          onClick={startCelebration}
-          className="px-8 py-4 bg-gradient-to-r from-rose-500 to-purple-500
-                   text-white text-xl rounded-lg transform transition-all 
-                   hover:scale-105 hover:from-rose-600 hover:to-purple-600
-                   animate-pulse shadow-xl"
-        >
-          Start Celebration ✨
-        </button>
+ if (!isStarted) {
+  return (
+    <div className="celebration-container">
+      {/* Auto-playing GIF added above the start button */}
+      <div className="celebration-gif-container">
+        <img
+          src="/celebration.gif" // Replace with your actual GIF path
+          alt="Celebration Gif"
+          className="celebration-gif"
+        />
       </div>
-    );
-  }
+      <button
+        onClick={startCelebration}
+        className="start-button"
+      >
+        Let's Celebrate ✨
+      </button>
+
+      {/* Background Decorations */}
+      <div className="decorations">
+        {[...Array(25)].map((_, i) => (
+          <span
+            key={`star-${i}`}
+            className="decoration star"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`
+            }}
+          >
+            ⭐
+          </span>
+        ))}
+        
+        {[...Array(15)].map((_, i) => (
+          <span
+            key={`heart-${i}`}
+            className="decoration heart"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`
+            }}
+          >
+            ❤️
+          </span>
+        ))}
+
+    </div>
+    </div>
+  );
+}
+
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-red-900 to-pink-900 
-                    overflow-hidden">
-      {/* Content Container with proper spacing */}
-      <div className="h-full flex flex-col items-center justify-between py-8 px-4">
+    <div className="celebration-container">
+      <div className="celebration-content">
         {/* Title Section */}
-        <div className="text-center mt-8">
-          <h1 className="text-6xl font-bold text-pink-200 mb-4 animate-glow">
+        <div className="title-section">
+          <h1 className="main-title">
             Happy Anniversary Umang! ❤️
           </h1>
-          <h2 className="text-4xl font-bold text-rose-200 animate-float">
+          <h2 className="sub-title">
             For you, My Beautiful Lady!
           </h2>
         </div>
 
-        {/* Bouquet Section - Centered */}
-        <div className="flex-1 flex items-center justify-center my-4">
-          <div className="w-[400px] h-[400px] relative">
-            <img 
-              src="/anniversary-bouquet.png"
-              alt="Anniversary Bouquet"
-              className="w-full h-full object-contain animate-float"
-            />
-          </div>
+        {/* Bouquet Section */}
+        <div className="bouquet-section">
+          <img 
+            src="/anniversary-bouquet.png"
+            alt="Anniversary Bouquet"
+            className="bouquet-image"
+          />
         </div>
 
-        {/* Button Section - Fixed at bottom with proper spacing */}
-        <div className="w-full max-w-md mb-8">
+        {/* Button Section */}
+        <div className="button-section">
           <button
-            onClick={() => {
-              audio.pause();
-              navigate('/memories');
-            }}
-            className="w-full py-4 bg-gradient-to-r from-rose-500 to-purple-500
-                     text-white text-xl rounded-lg transform transition-all 
-                     hover:scale-105 hover:from-rose-600 hover:to-purple-600"
+            onClick={() => navigate('/memories')}
+            className="continue-button"
           >
             Continue to Our Memories ✨
           </button>
@@ -133,53 +126,29 @@ const CelebrationPage = () => {
       </div>
 
       {/* Background Decorations */}
-      <div className="fixed inset-0 pointer-events-none">
-        {/* Confetti particles */}
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={`particle-${i}`}
-            className="absolute animate-fall"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `-${Math.random() * 20}%`,
-              animationDuration: `${Math.random() * 3 + 2}s`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          >
-            <span className="text-pink-300 opacity-60" style={{ fontSize: `${Math.random() * 8 + 4}px` }}>
-              •
-            </span>
-          </div>
-        ))}
-        
-        {/* Stars */}
+      <div className="decorations">
         {[...Array(25)].map((_, i) => (
           <span
             key={`star-${i}`}
-            className="absolute animate-twinkle"
+            className="decoration star"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              fontSize: '14px',
-              animationDelay: `${Math.random() * 3}s`,
-              color: '#FFD700'
+              animationDelay: `${Math.random() * 3}s`
             }}
           >
             ⭐
           </span>
         ))}
         
-        {/* Hearts */}
         {[...Array(15)].map((_, i) => (
           <span
             key={`heart-${i}`}
-            className="absolute animate-float"
+            className="decoration heart"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              fontSize: '16px',
-              animationDelay: `${Math.random() * 3}s`,
-              opacity: 0.6
+              animationDelay: `${Math.random() * 3}s`
             }}
           >
             ❤️
@@ -191,4 +160,3 @@ const CelebrationPage = () => {
 };
 
 export default CelebrationPage;
-

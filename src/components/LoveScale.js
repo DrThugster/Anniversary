@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loveScaleOptions, loveScaleResponses } from '../data/constants';
 
+
 const LoveScale = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState('');

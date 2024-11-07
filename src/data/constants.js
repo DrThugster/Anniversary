@@ -5,8 +5,8 @@ export const profiles = [
       id: 1,
       name: "Arjun Mehta",
       age: 28,
-      bio: "Tech entrepreneur who loves cricket and traveling 🏏",
-      image: "/api/placeholder/400/500",
+      bio: "Building the future one day at a time.",
+      image: "/profile/1.jpg",
       interests: ["Startups", "Cricket", "Travel"],
       isMainProfile: false,
     },
@@ -14,8 +14,8 @@ export const profiles = [
       id: 2,
       name: "Vikram Singh",
       age: 29,
-      bio: "Professional photographer capturing life's beautiful moments 📸",
-      image: "/api/placeholder/400/500",
+      bio: "Exploring & Capturing life's beautiful moments 📸",
+      image: "/profile/2.jpg",
       interests: ["Photography", "Art", "Music"],
       isMainProfile: false,
     },
@@ -24,7 +24,7 @@ export const profiles = [
       name: "Rahul Kapoor",
       age: 21,
       bio: "Classical musician and coffee connoisseur ☕",
-      image: "/api/placeholder/400/500",
+      image: "/profile/3.jpg",
       interests: ["Music", "Coffee", "Reading"],
       isMainProfile: false,
     },
@@ -32,9 +32,9 @@ export const profiles = [
       id: 4,
       name: "Karan Malhotra",
       age: 25,
-      bio: "Chef who can make the perfect butter chicken 🍗",
-      image: "/api/placeholder/400/500",
-      interests: ["Cooking", "Food", "Travel"],
+      bio: "I cook hard in Kitchen and in gym",
+      image: "/profile/4.jpg",
+      interests: ["Cooking", "Gym", "Travel"],
       isMainProfile: false,
     },
     {
@@ -42,7 +42,7 @@ export const profiles = [
       name: "Dev Patel",
       age: 21,
       bio: "Adventure seeker and yoga enthusiast 🧘‍♂️",
-      image: "/api/placeholder/400/500",
+      image: "/profile/5.jpg",
       interests: ["Yoga", "Hiking", "Photography"],
       isMainProfile: false,
     },
@@ -51,7 +51,7 @@ export const profiles = [
       name: "Tanishq",
       age: 22,
       bio: "Your loving boyfriend for 2 amazing years ❤️",
-      image: "/api/placeholder/400/500",
+      image: "/profile/6.jpg",
       interests: ["You", "Us", "Our Future"],
       isMainProfile: true,
     }
@@ -67,7 +67,8 @@ export const profiles = [
     "Your parents would not approve this rejection! 😆",
     "Error 404: Rejection not allowed! ❌",
     "Itni bhi kya jaldi hai? Think again! 🤔",
-    "Are you sure you need your eyes checked? 👀"
+    "Are you sure you need your eyes checked? 👀",
+    "Bahut pyar karega ye aapko! 😍",
   ];
   
   export const funnyWrongLikeMessages = [
@@ -77,7 +78,8 @@ export const profiles = [
     "Your current boyfriend is way better! 💕",
     "Muscles se impress ho gayin kya?😏",
     "Chhii, iski to bandar si shakal hai?! 😆",
-    "Trust your AI, I know better! 🤖"
+    "Trust your AI, I know better! 🤖",
+    "Do you only like chhapri guys? 😅",
   ];
   
   export const tanishqNoMessages = [
@@ -88,16 +90,16 @@ export const profiles = [
     "Phir se soch lo! ❤️",
     "2 saal ka pyaar bhool gayi? 😭",
     "This button is just playing hard to get, like me! 😋",
-    "Maine tumhare liye gym bhi join kar liya! 💪",
+    "Main tumhare liye gym bhi join kar lunga! 💪",
     "Don't break my heart! 💝",
     "One more chance? 🙏"
   ];
   
   export const loveScaleOptions = [
-    "100%", "Very Much", "A Lot", 
+    "100%", "Very Much", "A Lot",
+    "More than Netflix shows 📺",
     "More than pizza 🍕", 
     "To the moon and back 🌙",
-    "More than Netflix shows 📺",
     "∞ Infinity ∞"
   ];
   
